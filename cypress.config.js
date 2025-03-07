@@ -18,7 +18,7 @@ module.exports = defineConfig({
     specPattern: "cypress/e2e/*.feature",  // Feature files location
     stepDefinitions: "cypress/support/step_definitions/*.js",  // Step definitions location
     
-    //baseUrl: "https://www.naukri.com",   // Sets base URL
+    
     chromeWebSecurity: false,            // Disables Chrome security restrictions
     defaultCommandTimeout: 5000,        // Increases default timeout
     requestTimeout: 5000,               // Increases request timeout
