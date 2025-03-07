@@ -1,0 +1,34 @@
+name: Run Cypress Tests
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs at 12:00 AM UTC (5:30 AM IST)
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0  # Match your local Node.js version
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Cypress Tests (Attempt 1)
+        id: test-attempt-1
+        continue-on-error: true  # Allows retry if this step fails
+        run: npx cypress run
+
+      - name: Wait for 15 minutes before retrying (if failed)
+        if: failure() && steps.test-attempt-1.outcome == 'failure'
+        run: sleep 900  # 900 seconds = 15 minutes
+
+      - name: Run Cypress Tests (Attempt 2)
+        if: failure() && steps.test-attempt-1.outcome == 'failure'
+        run: npx cypress run
