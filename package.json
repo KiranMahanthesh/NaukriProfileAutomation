@@ -1,0 +1,21 @@
+{
+  "name": "project_naukri",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "cypress-file-upload": "^5.0.8",
+    "esbuild": "^0.25.0"
+  },
+  "dependencies": {
+    "cypress": "^11.2.0"
+  }
+}
