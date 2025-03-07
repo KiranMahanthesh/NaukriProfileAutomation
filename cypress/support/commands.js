@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.on('certificate:error', (event, systemCertificates, chains) => {
+    event.preventDefault();
+});
+
+import 'cypress-file-upload';

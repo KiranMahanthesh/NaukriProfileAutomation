@@ -12,7 +12,10 @@
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
-    "cypress": "^13.17.0",
+    "cypress-file-upload": "^5.0.8",
     "esbuild": "^0.25.0"
+  },
+  "dependencies": {
+    "cypress": "^11.2.0"
   }
 }
