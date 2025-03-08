@@ -11,10 +11,11 @@ module.exports = defineConfig({
       });
       on("file:preprocessor", bundler);
       await addCucumberPreprocessorPlugin(on, config);
+      
 
        // Load environment variables from GitHub Secrets
        config.env.NAUKRI_EMAIL = process.env.NAUKRI_EMAIL || "";
-       config.env.NAUKRI_PASSWORD = process.env.NAUKRI_PASSWORD || "";
+      config.env.NAUKRI_PASSWORD = process.env.NAUKRI_PASSWORD || "";
 
       return config;
     },
@@ -33,6 +34,8 @@ module.exports = defineConfig({
     viewportHeight: 720,                  // Sets default viewport height
     experimentalModifyObstructiveThirdPartyCode: true,
     modifyObstructiveCode: false,
+    screenshotOnRunFailure: true,  // Ensure screenshots are captured
+    video: true,                   // Enable video recording
      
   
   },
