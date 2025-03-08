@@ -23,13 +23,16 @@ jobs:
       - name: Install Cypress 11.2.0
         run: npm install cypress@11.2.0 --force  # Ensure Cypress is installed
 
-      - name: Add Cypress to PATH
-        run: echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH
+      - name: Fix Cypress Permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
+      - name: Verify Cypress Installation
+        run: npx cypress verify  # Ensures Cypress is installed correctly
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
         continue-on-error: true
-        run: ./node_modules/.bin/cypress run  # Use absolute path
+        run: npx cypress run  # Use npx to avoid permission issues
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
@@ -37,4 +40,4 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: ./node_modules/.bin/cypress run  # Use absolute path
+        run: npx cypress run  # Retry with npx
