@@ -17,14 +17,19 @@ jobs:
         with:
           node-version: 22.12.0  # Match your local Node.js version
 
+      - name: Cache Cypress Binary
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Cypress  # Cache the Cypress binary
+          key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            cypress-cache-${{ runner.os }}-
+
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Cypress 11.2.0
-        run: npm install cypress@11.2.0 --force  # Ensure Cypress is installed
-
-      - name: Fix Cypress Permissions
-        run: chmod +x ./node_modules/.bin/cypress
+      - name: Install Cypress Binary
+        run: npx cypress install  # Explicitly install the Cypress binary
 
       - name: Verify Cypress Installation
         run: npx cypress verify  # Ensures Cypress is installed correctly
@@ -32,7 +37,7 @@ jobs:
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
         continue-on-error: true
-        run: npx cypress run  # Use npx to avoid permission issues
+        run: npx cypress run  # Run tests with npx to avoid path issues
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
@@ -40,4 +45,4 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: npx cypress run  # Retry with npx
+        run: npx cypress run  # Retry Cypress tests
