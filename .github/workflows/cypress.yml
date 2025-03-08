@@ -15,12 +15,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0  # Match your local Node.js version
+          node-version: 22.12.0
 
       - name: Cache Cypress Binary
         uses: actions/cache@v4
         with:
-          path: ~/.cache/Cypress  # Cache the Cypress binary
+          path: ~/.cache/Cypress
           key: cypress-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             cypress-cache-${{ runner.os }}-
@@ -28,21 +28,27 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Fix Cypress Permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
+      - name: Add Cypress to PATH
+        run: echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH
+
       - name: Install Cypress Binary
-        run: npx cypress install  # Explicitly install the Cypress binary
+        run: npx cypress install --force
 
       - name: Verify Cypress Installation
-        run: npx cypress verify  # Ensures Cypress is installed correctly
+        run: npx cypress verify
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
         continue-on-error: true
-        run: npx cypress run  # Run tests with npx to avoid path issues
+        run: npx cypress run
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: sleep 900  # 900 seconds = 15 minutes
+        run: sleep 900
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: npx cypress run  # Retry Cypress tests 
+        run: npx cypress run
