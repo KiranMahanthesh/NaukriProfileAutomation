@@ -20,21 +20,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Cypress v11.2.0
-        run: |
-          npm install cypress@11.2.0
-          npx cypress install
-
       - name: Fix Cypress Permissions
-        run: |
-          chmod 777 node_modules/.bin/cypress
-          chmod -R 777 node_modules/cypress
-          ls -la node_modules/.bin/cypress
+        run: chmod -R 777 node_modules/cypress
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
         continue-on-error: true  # Allows retry if this step fails
-        run: npx cypress run
+        run: npm test
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
@@ -42,4 +34,4 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: npx cypress run
+        run: npm test
