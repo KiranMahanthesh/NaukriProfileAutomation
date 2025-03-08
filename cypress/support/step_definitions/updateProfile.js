@@ -17,10 +17,14 @@ Given("I am on the Naukri login page", () => {
 // });
 
 When("I log in with valid credentials", () => {
-  cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"));
-  cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false });
+  cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"), { delay: 200 });
+  cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false, delay: 200 });
   cy.get('.blue-btn').click();
-  cy.wait(5000); 
+  // Wait for page load (increase wait time if needed)
+  cy.wait(10000);  
+
+  // Ensure login was successful by checking for a post-login element
+  cy.get("a[href='/mnjuser/profile']", { timeout: 20000 }).should('be.visible');
 });
 
 When("I navigate to the profile section", () => {
