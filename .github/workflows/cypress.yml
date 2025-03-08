@@ -42,7 +42,6 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
-        continue-on-error: true
         run: npx cypress run
         env:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
@@ -52,13 +51,28 @@ jobs:
         if: failure()  # Upload only if tests fail
         uses: actions/upload-artifact@v4
         with:
-              name: cypress-screenshots
-              path: cypress/screenshots
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: Upload Cypress Videos
+        if: failure()  # Upload test execution videos
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
         run: sleep 900
 
       - name: Run Cypress Tests (Attempt 2)
+        id: test-attempt-2
         if: failure() && steps.test-attempt-1.outcome == 'failure'
         run: npx cypress run
+        env:
+          NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
+          NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
+
+      - name: Fail Job if Cypress Tests Fail
+        if: failure() && steps.test-attempt-2.outcome == 'failure'
+        run: exit 1  # Ensures GitHub Actions fails if Cypress tests fail
