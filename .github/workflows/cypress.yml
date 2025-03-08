@@ -27,8 +27,9 @@ jobs:
 
       - name: Fix Cypress Permissions
         run: |
-          chmod +x $(npm bin)/cypress
-          ls -l $(npm bin)/cypress  # Verify permissions
+          chmod 777 node_modules/.bin/cypress
+          chmod -R 777 node_modules/cypress
+          ls -la node_modules/.bin/cypress
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
