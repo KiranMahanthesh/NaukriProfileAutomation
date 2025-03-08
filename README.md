@@ -3,6 +3,7 @@
 ## 🌟 Overview
 This project automates the process of updating the resume on **Naukri.com** using **Cypress** and **Cucumber BDD Framework**. It includes scheduling a **daily run** via **GitHub Actions** to ensure your profile stays **fresh and active**. 💼✨
 
+
 ---
 
 ## 🔥 Features

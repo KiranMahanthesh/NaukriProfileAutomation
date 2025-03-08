@@ -44,6 +44,9 @@ jobs:
         id: test-attempt-1
         continue-on-error: true
         run: npx cypress run
+        env:
+          NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
+          NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'

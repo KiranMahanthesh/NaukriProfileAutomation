@@ -12,6 +12,10 @@ module.exports = defineConfig({
       on("file:preprocessor", bundler);
       await addCucumberPreprocessorPlugin(on, config);
 
+       // Load environment variables from GitHub Secrets
+       config.env.NAUKRI_EMAIL = process.env.NAUKRI_EMAIL || "";
+       config.env.NAUKRI_PASSWORD = process.env.NAUKRI_PASSWORD || "";
+
       return config;
     },
     
