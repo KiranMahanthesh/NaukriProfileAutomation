@@ -22,7 +22,9 @@ When("I log in with valid credentials", () => {
 });
 
 When("I navigate to the profile section", () => {
-  cy.get('.view-profile-wrapper > a').click(); // Update with actual selector
+  //cy.get("a[href='/mnjuser/profile']").click(); // 
+  cy.wait(3000);  // Adjust based on load time
+  cy.get("a[href='/mnjuser/profile']", { timeout: 10000 }).should('be.visible').click();
 });
 
 
