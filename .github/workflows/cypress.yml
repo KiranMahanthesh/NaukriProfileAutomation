@@ -45,4 +45,4 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: npx cypress run  # Retry Cypress tests
+        run: npx cypress run  # Retry Cypress tests 
