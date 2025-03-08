@@ -18,15 +18,22 @@ jobs:
           node-version: 22.12.0  # Match your local Node.js version
 
       - name: Install Dependencies
+        run: npm install
+
+      - name: Install Cypress v11.2.0
         run: |
-          npm install cypress@11.2.0  # Install Cypress v11.2.0
+          npm install cypress@11.2.0
           npx cypress install
-          chmod +x node_modules/.bin/cypress  # Fix permission issue
+
+      - name: Fix Cypress Permissions
+        run: |
+          chmod +x $(npm bin)/cypress
+          ls -l $(npm bin)/cypress  # Verify permissions
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
         continue-on-error: true  # Allows retry if this step fails
-        run: CI=1 npx cypress run  # CI mode for non-interactive environments
+        run: npx cypress run
 
       - name: Wait for 15 minutes before retrying (if failed)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
@@ -34,4 +41,4 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 2)
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: CI=1 npx cypress run
+        run: npx cypress run
