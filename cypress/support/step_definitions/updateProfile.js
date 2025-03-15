@@ -11,28 +11,28 @@ Given("I am on the Naukri login page", () => {
 });
 
 //Use while running in local
-When("I log in with valid credentials", () => {
-  cy.fixture("credentials").then((credentials) => {
-    cy.get('#usernameField').type(credentials.email);
-    cy.get('#passwordField').type(credentials.password, { log: false });
-    cy.get('.blue-btn').click().then(() => {
-      cy.log(`Successfully logged in`)
-    })
-    cy.wait(5000);
-  });
-});
+// When("I log in with valid credentials", () => {
+//   cy.fixture("credentials").then((credentials) => {
+//     cy.get('#usernameField').type(credentials.email);
+//     cy.get('#passwordField').type(credentials.password, { log: false });
+//     cy.get('.blue-btn').click().then(() => {
+//       cy.log(`Successfully logged in`)
+//     })
+//     cy.wait(5000);
+//   });
+// });
 
 //Use while running in github actions
-// When("I log in with valid credentials", () => {
-//   cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"), { delay: 200 });
-//   cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false, delay: 200 });
-//   cy.get('.blue-btn').click();
-//   // Wait for page load (increase wait time if needed)
-//   cy.wait(10000);  
+When("I log in with valid credentials", () => {
+  cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"), { delay: 200 });
+  cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false, delay: 200 });
+  cy.get('.blue-btn').click();
+  // Wait for page load (increase wait time if needed)
+  cy.wait(10000);  
 
-//   // Ensure login was successful by checking for a post-login element
-//   cy.get("a[href='/mnjuser/profile']", { timeout: 20000 }).should('be.visible');
-// });
+  // Ensure login was successful by checking for a post-login element
+  cy.get("a[href='/mnjuser/profile']", { timeout: 20000 }).should('be.visible');
+});
 
 When("I navigate to the profile section", () => {
   //cy.get("a[href='/mnjuser/profile']").click(); // 

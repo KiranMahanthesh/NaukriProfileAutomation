@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NAUKRI_EMAIL = 8a6dca82-8943-492d-8cf5-75791748334e // Jenkins credentials ID
+        NAUKRI_EMAIL = 8a6dca82-8943-492d-8cf5-75791748334e 
         NAUKRI_PASSWORD = 6eaf16df-7605-476b-bcb6-c4884c8c32c1
     }
 
@@ -64,7 +64,7 @@ pipeline {
                         currentBuild.result = 'UNSTABLE'
                         echo "First attempt failed, retrying after 15 minutes..."
                         sleep(time: 15, unit: 'MINUTES')
-                        sh 'xvfb-run --auto-servernum npx cypress run --browser chrome --headed'
+                        sh 'xvfb-run --auto-servernum npx cypress run --browser chrome --headed --env NAUKRI_EMAIL=$NAUKRI_EMAIL,NAUKRI_PASSWORD=$NAUKRI_PASSWORD'
                     }
                 }
             }
