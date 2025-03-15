@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'ubuntu'
-    }
+    agent any
 
     environment {
         NAUKRI_EMAIL = 8a6dca82-8943-492d-8cf5-75791748334e // Jenkins credentials ID
