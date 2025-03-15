@@ -17,14 +17,6 @@ pipeline {
             }
         }
 
-        stage('Cache Cypress Binary') {
-            steps {
-                sh '''
-                mkdir -p ~/.cache/Cypress
-                '''
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
