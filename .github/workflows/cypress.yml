@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Cypress Tests (Attempt 1)
         id: test-attempt-1
-        run: npx cypress run
+        run: xvfb-run --auto-servernum npx cypress run --browser chrome --headed
         env:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
           NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}
@@ -68,7 +68,8 @@ jobs:
       - name: Run Cypress Tests (Attempt 2)
         id: test-attempt-2
         if: failure() && steps.test-attempt-1.outcome == 'failure'
-        run: npx cypress run
+        run: xvfb-run --auto-servernum npx cypress run --browser chrome --headed
+
         env:
           NAUKRI_EMAIL: ${{ secrets.NAUKRI_EMAIL }}
           NAUKRI_PASSWORD: ${{ secrets.NAUKRI_PASSWORD }}

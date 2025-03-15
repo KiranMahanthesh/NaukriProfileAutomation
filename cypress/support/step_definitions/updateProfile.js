@@ -2,32 +2,38 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 
 Given("I am on the Naukri login page", () => {
-  cy.visit("https://www.naukri.com/nlogin/login", { headers: { "Accept-Encoding": "gzip, deflate", } })
+  cy.visit("https://www.naukri.com/nlogin/login", {
+    headers: {
+      "Accept-Encoding": "gzip, deflate",
+      "User-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+    }
+    })
   cy.wait(1000);
 });
 
 //Use while running in local
-When("I log in with valid credentials", () => {
-  cy.fixture("credentials").then((credentials) => {
-    cy.get('#usernameField').type(credentials.email);
-    cy.get('#passwordField').type(credentials.password, { log: false });
-    cy.get('.blue-btn').click().then(() => {
-      cy.log(`Successfully logged in`)
-    })
-    cy.wait(5000);
-  });
-});
-
 // When("I log in with valid credentials", () => {
-//   cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"), { delay: 200 });
-//   cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false, delay: 200 });
-//   cy.get('.blue-btn').click();
-//   // Wait for page load (increase wait time if needed)
-//   cy.wait(10000);  
-
-//   // Ensure login was successful by checking for a post-login element
-//   cy.get("a[href='/mnjuser/profile']", { timeout: 20000 }).should('be.visible');
+//   cy.fixture("credentials").then((credentials) => {
+//     cy.get('#usernameField').type(credentials.email);
+//     cy.get('#passwordField').type(credentials.password, { log: false });
+//     cy.get('.blue-btn').click().then(() => {
+//       cy.log(`Successfully logged in`)
+//     })
+//     cy.wait(5000);
+//   });
 // });
+
+//Use while running in github actions
+When("I log in with valid credentials", () => {
+  cy.get('#usernameField').type(Cypress.env("NAUKRI_EMAIL"), { delay: 200 });
+  cy.get('#passwordField').type(Cypress.env("NAUKRI_PASSWORD"), { log: false, delay: 200 });
+  cy.get('.blue-btn').click();
+  // Wait for page load (increase wait time if needed)
+  cy.wait(10000);  
+
+  // Ensure login was successful by checking for a post-login element
+  cy.get("a[href='/mnjuser/profile']", { timeout: 20000 }).should('be.visible');
+});
 
 When("I navigate to the profile section", () => {
   //cy.get("a[href='/mnjuser/profile']").click(); // 
@@ -47,13 +53,13 @@ When("I upload my resume", () => {
   cy.get('.msg').should("be.visible").and("have.text", "Resume has been successfully uploaded.")
 });
 
-When("I logout the session", () => {
-  cy.get('.nI-gNb-drawer__bars').click({ force: true });
-  cy.wait(1000);
-  cy.get(':nth-child(4) > .nI-gNb-list-cta').click()
-    // .then(() => {
-    // cy.log(`Successfully logged out`)
-  })
+// When("I logout the session", () => {
+//   cy.get('.nI-gNb-drawer__bars').click({ force: true });
+//   cy.wait(1000);
+//   cy.get(':nth-child(4) > .nI-gNb-list-cta').click()
+//     // .then(() => {
+//     // cy.log(`Successfully logged out`)
+//   })
 //   // Cypress.on('uncaught:exception', (err, runnable) => {
 //   //   // Ignore the specific error message
 //   //   if (err.message.includes("b is not a function")) {
