@@ -19,31 +19,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Fix Cypress Permissions') {
-            steps {
-                sh 'chmod +x ./node_modules/.bin/cypress'
-            }
-        }
-
-        stage('Add Cypress to PATH') {
-            steps {
-                sh 'echo "$(pwd)/node_modules/.bin" >> $GITHUB_PATH'
+                bat 'npm install'
             }
         }
 
         stage('Install Cypress Binary') {
             steps {
-                sh 'npx cypress install --force'
+                bat 'npx cypress install --force'
             }
         }
 
         stage('Verify Cypress Installation') {
             steps {
-                sh 'npx cypress verify'
+                bat 'npx cypress verify'
             }
         }
 
@@ -51,12 +39,12 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'xvfb-run --auto-servernum npx cypress run --browser chrome --headed --env NAUKRI_EMAIL=$NAUKRI_EMAIL,NAUKRI_PASSWORD=$NAUKRI_PASSWORD'
+                        bat "npx cypress run --browser chrome --headed --env NAUKRI_EMAIL=%NAUKRI_EMAIL%,NAUKRI_PASSWORD=%NAUKRI_PASSWORD%"
                     } catch (Exception e) {
                         currentBuild.result = 'UNSTABLE'
                         echo "First attempt failed, retrying after 15 minutes..."
                         sleep(time: 15, unit: 'MINUTES')
-                        sh 'xvfb-run --auto-servernum npx cypress run --browser chrome --headed --env NAUKRI_EMAIL=$NAUKRI_EMAIL,NAUKRI_PASSWORD=$NAUKRI_PASSWORD'
+                        bat "npx cypress run --browser chrome --headed --env NAUKRI_EMAIL=%NAUKRI_EMAIL%,NAUKRI_PASSWORD=%NAUKRI_PASSWORD%"
                     }
                 }
             }
