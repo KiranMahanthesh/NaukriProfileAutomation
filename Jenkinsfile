@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS 22.12.0'  // NodeJS version from Global Tool Configuration
+        nodejs 'Default'  // Use the default NodeJS installation
     }
 
     stages {
