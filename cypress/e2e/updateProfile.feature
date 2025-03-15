@@ -6,4 +6,4 @@ Feature: Update Naukri Profile
     When I log in with valid credentials
     And I navigate to the profile section
     And I upload my resume
-   
+    #And I logout the session

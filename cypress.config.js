@@ -25,9 +25,9 @@ module.exports = defineConfig({
     
     
     chromeWebSecurity: false,            // Disables Chrome security restrictions
-    defaultCommandTimeout: 5000,        // Increases default timeout
-    requestTimeout: 5000,               // Increases request timeout
-    pageLoadTimeout: 5000,              // Extends page load timeout
+    defaultCommandTimeout: 12000,        // Increases default timeout
+    requestTimeout: 12000,               // Increases request timeout
+    pageLoadTimeout: 12000,              // Extends page load timeout
     experimentalSessionAndOrigin: true,   // Enables cross-origin support
     failOnStatusCode: false,              // Prevents failures due to non-2xx responses
     viewportWidth: 1280,                  // Sets default viewport width

@@ -3,3 +3,5 @@ Cypress.on('certificate:error', (event, systemCertificates, chains) => {
 });
 
 import 'cypress-file-upload';
+import 'cypress-iframe';
+
