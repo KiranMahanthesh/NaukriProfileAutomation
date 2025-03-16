@@ -13,6 +13,8 @@ pipeline {
 
         // Cypress cache folder location within the workspace
         CYPRESS_CACHE_FOLDER = "${WORKSPACE}\\.cache\\Cypress"
+
+        JAVA_TOOL_OPTIONS = '-Dfile.encoding=UTF-8'
     }
 
     tools {
