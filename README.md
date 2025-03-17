@@ -1,103 +1,72 @@
-# 🚀 Naukri Profile Automation 🤖
+# GitHub Repository Integrated with Jenkins for Cypress Test Run
 
-## 🌟 Overview
-This project automates the process of updating the resume on **Naukri.com** using **Cypress** and **Cucumber BDD Framework**. It includes scheduling a **daily run** via **GitHub Actions** to ensure your profile stays **fresh and active**. 💼✨
+## 🚀 Project Overview
 
-
----
-
-## 🔥 Features
-✅ **Automated Login** using **Cypress** 🏆
-✅ Navigates to the **Profile Section** 🔍
-✅ Uploads a fresh **resume file** 📂
-✅ **Verifies successful upload** via confirmation message ✅
-✅ **Runs daily at 5:30 AM IST** ⏰ using **GitHub Actions**
-✅ **Retry Mechanism:** Auto-retries in **15 mins** if failed 🔄
+This project is designed to automate the Naukri profile update using **Cypress** with the **Cucumber BDD framework**. The automation pipeline can be triggered to run at your convenience through **Jenkins CI/CD pipeline** or scheduled through **cron jobs**.
 
 ---
 
-## 📌 Prerequisites
-- ⚡ Node.js **v22.12.0** (Ensure your local version matches the GitHub Actions setup)
-- 🏗️ Cypress installed (`npm install cypress`)
-- 🔐 GitHub repository access
-- 📝 Naukri.com account with valid credentials
+## 🛠️ Tools and Technologies Used
+
+- **Cypress (Automation Tool)**
+- **Cucumber BDD Framework (Behavior-Driven Development)**
+- **Jenkins (CI/CD Pipeline)**
+- **GitHub (Version Control System)**
+- **NodeJS (Runtime Environment)**
 
 ---
 
-## 🚀 Installation
-1️⃣ Clone the repository:
+## ✅ Steps to Set Up
+
+1. Clone the repository:
    ```sh
    git clone https://github.com/KiranMahanthesh/NaukriProfileAutomation.git
    cd NaukriProfileAutomation
    ```
-2️⃣ Install dependencies:
+2. Install dependencies:
    ```sh
    npm install
    ```
-3️⃣ Set up credentials securely using **GitHub Secrets**:
+3. Set up credentials securely in Jenkins credentials manager:
    - `NAUKRI_EMAIL`: Your **Naukri login email** 📧
    - `NAUKRI_PASSWORD`: Your **Naukri password** 🔑
+4. Install and configure Jenkins.
+5. Create a Jenkins pipeline job and connect it to the GitHub repository.
+6. Run the pipeline whenever desired or schedule it through **cron jobs**.
 
 ---
 
-## 🏃 Running Tests Locally
-To execute the automation script locally:
-```sh
-npx cypress run
-```
-Or open Cypress GUI:
-```sh
-npx cypress open
-```
+## ✅ Cypress Execution Flow
+
+1. Checkout the repository from GitHub.
+2. Install project dependencies.
+3. Install and verify Cypress binary.
+4. Run Cypress tests with credentials passed as environment variables.
+5. Capture screenshots and videos on failure.
+6. Archive Cypress artifacts for debugging.
 
 ---
 
-## 🛠️ GitHub Actions - CI/CD Setup
-This project includes a **GitHub Actions workflow** that:
-✅ Runs the script **daily at 5:30 AM IST** ⏰
-✅ **Retries execution once after 15 minutes** if the first attempt fails 🔄
+## ✅ Output and Reporting
 
-Workflow file: `.github/workflows/cypress.yml`
-
-### 🚀 Triggering a Manual Run
-1️⃣ Go to **Actions** tab in the GitHub repository 📂
-2️⃣ Select the latest **Cypress Test Run** 🎯
-3️⃣ Click **Run workflow** ▶️
+- Cypress screenshots and videos are captured on test failure.
+- Test results are archived and accessible via Jenkins.
 
 ---
 
-## 🏗️ Cypress Test Flow
-1️⃣ **Login** to Naukri with credentials 🔑
-2️⃣ Navigate to the **Profile Section** 📂
-3️⃣ Click on **Update Resume** 🔄
-4️⃣ Upload the **resume file** (`Kiran_Resume_QA.pdf`) 📎
-5️⃣ Validate **success message** (`Resume has been successfully uploaded.`) ✅
-6️⃣ **Stop execution** using `Cypress.runner.stop()` ⏹️
+## 🎯 Future Scope
+
+- Better error handling.
+- Further enhancements on the scripts.
+- Resolving Cypress cache issue which is taking more time to install.
+- Cloud-based run (e.g., GitHub or AWS).
+- Email notification.
 
 ---
 
-## ⚠️ Troubleshooting
+## 🚀 Conclusion
 
-🔴 **Git error: 'fatal: refusing to merge unrelated histories'**
-```sh
-git pull origin main --allow-unrelated-histories
-```
-
-🔴 **Switch branch to `main` of correct repository**
-```sh
-git remote set-url origin https://github.com/KiranMahanthesh/NaukriProfileAutomation.git
-git checkout main
-```
-
----
-
-## 🤝 Contribution
-💡 Fork the repository and submit **pull requests** for enhancements & fixes! 🚀
-
----
-
-## 📜 License
-This project is licensed under the **MIT License** 📄
+With this CI/CD pipeline, you can ensure **seamless Naukri profile updates** and **automated tests running efficiently.** ✅
 
 ---
 
