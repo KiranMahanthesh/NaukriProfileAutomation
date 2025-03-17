@@ -1,76 +1,84 @@
-# GitHub Repository Integrated with Jenkins for Cypress Test Run
-
-## 🚀 Project Overview
-
-This project is designed to automate the Naukri profile update using **Cypress** with the **Cucumber BDD framework**. The automation pipeline can be triggered to run at your convenience through **Jenkins CI/CD pipeline** or scheduled through **cron jobs**.
+# Naukri Profile Automation Using Cypress and Jenkins
 
 ---
 
-## 🛠️ Tools and Technologies Used
+## Project Overview
 
-- **Cypress (Automation Tool)**
-- **Cucumber BDD Framework (Behavior-Driven Development)**
-- **Jenkins (CI/CD Pipeline)**
-- **GitHub (Version Control System)**
-- **NodeJS (Runtime Environment)**
+This project is designed to automate the **Naukri profile update** using **Cypress** with the **Cucumber BDD framework**. The automation pipeline can be triggered **manually** or scheduled using **cron jobs**.
 
 ---
 
-## ✅ Steps to Set Up
+## Tools and Technologies Used
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/KiranMahanthesh/NaukriProfileAutomation.git
-   cd NaukriProfileAutomation
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Set up credentials securely in Jenkins credentials manager:
-   - `NAUKRI_EMAIL`: Your **Naukri login email** 📧
-   - `NAUKRI_PASSWORD`: Your **Naukri password** 🔑
-4. Install and configure Jenkins.
-5. Create a Jenkins pipeline job and connect it to the GitHub repository.
-6. Run the pipeline whenever desired or schedule it through **cron jobs**.
+| Tool              | Purpose                                   |
+|----------------|------------------------------------|
+| **Cypress**         | Automation Testing Tool                   |
+| **Cucumber BDD** | Behavior-Driven Development Framework |
+| **Jenkins**          | CI/CD Pipeline Management                |
+| **GitHub**           | Version Control System                    |
+| **NodeJS**          | Runtime Environment                         |
 
 ---
 
-## ✅ Cypress Execution Flow
+## Steps to Set Up
 
-1. Checkout the repository from GitHub.
-2. Install project dependencies.
-3. Install and verify Cypress binary.
-4. Run Cypress tests with credentials passed as environment variables.
-5. Capture screenshots and videos on failure.
-6. Archive Cypress artifacts for debugging.
+### Step 1: Clone the Repository
+```sh
+git clone https://github.com/KiranMahanthesh/NaukriProfileAutomation.git
+cd NaukriProfileAutomation
+```
 
----
+### Step 2: Install Dependencies
+```sh
+npm install
+```
 
-## ✅ Output and Reporting
+### Step 3: Set Up Credentials Securely
+- Use **GitHub Secrets** for `NAUKRI_EMAIL` and `NAUKRI_PASSWORD` if running in **GitHub Actions**.
+- Use **Jenkins Credentials Manager** if running in **Jenkins**.
 
-- Cypress screenshots and videos are captured on test failure.
-- Test results are archived and accessible via Jenkins.
+### Step 4: Create a Jenkins Pipeline Job
+Connect the job to the **GitHub repository**.
 
----
-
-## 🎯 Future Scope
-
-- Better error handling.
-- Further enhancements on the scripts.
-- Resolving Cypress cache issue which is taking more time to install.
-- Cloud-based run (e.g., GitHub or AWS).
-- Email notification.
+### Step 5: Run the Pipeline
+- **Trigger manually** whenever you wish.
+- Or **schedule via cron jobs** for periodic execution.
 
 ---
 
-## 🚀 Conclusion
+## Cypress Execution Flow
 
-With this CI/CD pipeline, you can ensure **seamless Naukri profile updates** and **automated tests running efficiently.** ✅
+1️⃣ Checkout the repository from **GitHub**.
+2️⃣ Install project dependencies.
+3️⃣ Install and verify **Cypress binary**.
+4️⃣ Run **Cypress tests** with credentials as environment variables.
+5️⃣ Capture **screenshots and videos** on test failure.
+6️⃣ Archive Cypress artifacts for debugging.
 
 ---
 
-## 👨‍💻 Author
+## Output and Reporting
+
+- ✅ Screenshots and videos captured on test failures.
+- ✅ Test results archived and accessible via **Jenkins**.
+
+---
+
+## Future Scope
+
+- Better **error handling**.
+- Further enhancements on the **scripts**.
+- Resolving **Cypress cache issue**, which is taking more time to install.
+- **Cloud-based run** (e.g., GitHub or AWS).
+- **Email notification** integration.
+
+---
+
+## Conclusion
+
+With this **CI/CD pipeline**, you can ensure **seamless Naukri profile updates** and **automated tests running efficiently. ✅**
+
+---
+
+## Author
 Developed by **Kiran Mahanthesh** ❤️
-
-
